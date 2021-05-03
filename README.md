@@ -4,8 +4,8 @@ You will learn how to use the following `flask API template` to create a `large`
 
 # Getting Started
 
-1. Clone the following [repo]() to your local machine.
-2. Create a local virtual environment inside the root directory of the cloned [repo]() i.e `python3 -m venv venv`.
+1. Clone the following [repo](https://github.com/Arrotech/flask-api.git) to your local machine.
+2. Create a local virtual environment inside the root directory of the cloned [repo](https://github.com/Arrotech/flask-api.git) i.e `python3 -m venv venv`.
 3. Activate the environment as follows: `source .env`.
 4. Install all the required dependencies as follows: `pip install -r requirements.txt`.
 5. If you want to use your own database, navigate to the root directory and find `.env` file and update the `DATABASE_URI` and `TEST_DATABASE_URI`
