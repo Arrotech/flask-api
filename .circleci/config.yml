@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.8.5-stretch-browsers
+      - image: circleci/python:3.6.2-stretch-browsers
         environment:
           FLASK_ENV: testing
           TEST_DATABASE_URL: postgresql://postgres:postgres20930988@localhost:5432/test_flask_api?sslmode=disable
