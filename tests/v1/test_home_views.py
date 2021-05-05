@@ -7,5 +7,5 @@ class TestHomeViews(BaseTest):
     def test_index(self):
         """Test the index view endpoint."""
 
-        response = self.client.get('/api/v1/', follow_redirects=True)
+        response = self.client.get('/api/v1/home', follow_redirects=True)
         assert response.status_code == 200

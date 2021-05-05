@@ -1,0 +1,34 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.8.5-stretch-browsers
+        environment:
+          FLASK_ENV: testing
+          TEST_DATABASE_URL: postgresql://postgres:postgres20930988@localhost:5432/test_flask_api?sslmode=disable
+      - image: circleci/postgres:9.6.5-alpine-ram
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: test_flask_api
+          POSTGRES_PASSWORD: 'postgres20930988'
+    steps:
+      - checkout
+      - run: mkdir tests/v1
+      - run:
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+      - save_cache:
+          key: deps2-{{ checksum "requirements.txt" }}
+          paths:
+            - 'venv'
+      - run:
+          command: |
+            . venv/bin/activate
+            python3 manage.py pytest
+      - store_artifacts:
+          path: tests/v1/
+          destination: tr1
+      - store_test_results:
+          path: tests/v1/
