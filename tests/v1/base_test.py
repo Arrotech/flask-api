@@ -10,10 +10,12 @@ class BaseTest(unittest.TestCase):
         """Set up the app for testing."""
         self.app = create_app('testing')
         self.client = self.app.test_client()
-        with self.app.app_context():
-            db.create_all()
+        self.app_context = self.app.app_context()
+        self.app_context.push()
+        db.create_all()
 
     def tearDown(self):
         """Tear down the app after testing."""
-        with self.app.app_context():
-            db.drop_all()
+        self.app_context = self.app.app_context()
+        self.app_context.push()
+        db.drop_all()
