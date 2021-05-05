@@ -1,7 +1,7 @@
 [![CircleCI](https://circleci.com/gh/Arrotech/flask-api.svg?style=svg)](https://circleci.com/gh/Arrotech/flask-api)
 
 
-# Back-End Flask API (Starter Template)
+# Flask API (Starter Template)
 
 You will learn how to use the following `flask API template` to create a `large` and `modularized Back-end System`.
 
