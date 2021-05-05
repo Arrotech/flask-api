@@ -1,4 +1,4 @@
-# Flask API
+# Back-End Flask API (Starter Template)
 
 You will learn how to use the following `flask API template` to create a `large` and `modularized Back-end System`.
 
@@ -41,6 +41,10 @@ To run the application run the following command `flask run`.
 ## 6. Tests
 
 ## 7. Virtual Environment and Environment Variables
+
+**DISCLAIMER (:**
+DO NOT push your `.env` files to any version control service such as `GITHUB`. In this tutorial I only did it so you can have an idea of how to use one. This file is for storing secure and private information about you application such as `passwords`, `secret_key`, e.t.c.
+A good practice is to add your `.env` file to a `.gitignore` file. This will prevent future push therofore protecting you private data.
 
 ## 8. Version Control
 
