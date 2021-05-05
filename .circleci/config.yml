@@ -5,7 +5,7 @@ jobs:
       - image: circleci/python:3.6.2-stretch-browsers
         environment:
           FLASK_ENV: testing
-          TEST_DATABASE_URL: postgres://postgres:postgres20930988@localhost:5432/test_flask_api?sslmode=disable
+          TEST_DATABASE_URL: "postgres://postgres:postgres20930988@localhost:5432/test_flask_api?sslmode=disable"
       - image: circleci/postgres:9.6.5-alpine-ram
         environment:
           POSTGRES_USER: postgres
