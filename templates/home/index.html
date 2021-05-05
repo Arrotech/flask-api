@@ -1,0 +1,83 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
+Flask API Starter Template
+{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{{ url_for('blueprint_v1.index') }}">Flask API</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('blueprint_v1.index') }}">Home <span
+                        class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-info my-2 my-sm-0 text-light" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="alert alert-primary mt-5" role="alert">
+        Welcome to Flask API Starter Template
+    </div>
+    <div class="row">
+        <div class="col-lg-4 mt-2">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Bootstrap</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Flask Bootstrap</h6>
+                    <p class="card-text">The template uses Flask-Boostrap for styling. You can familiarize yourself with
+                        the
+                        extension to take advantage of boostrap classes, components e.t.c.</p>
+                    <a href="https://pythonhosted.org/Flask-Bootstrap/basic-usage.html" class="card-link">Get Started
+                        with
+                        Flask-Boostrap</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 mt-2">
+            <!-- <p class="lead">
+                You can customize this template theme to be your landing page. <span class="h3">💣</span>
+            </p> -->
+            <ul class="list-group">
+                <li class="list-group-item"><h4>These are some of the boostrap classes.</h4></li>
+                <li class="list-group-item bg-dark text-light">Dapibus ac facilisis in</li>
+                <li class="list-group-item bg-warning">Morbi leo risus</li>
+                <li class="list-group-item bg-success">Porta ac consectetur ac</li>
+                <li class="list-group-item bg-danger text-light">Vestibulum at eros</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

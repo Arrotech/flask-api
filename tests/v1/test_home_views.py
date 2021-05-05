@@ -1,7 +1,7 @@
 from tests.v1.base_test import BaseTest
 
 
-class TestViews(BaseTest):
+class TestHomeViews(BaseTest):
     """Test views."""
 
     def test_index(self):
