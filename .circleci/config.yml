@@ -13,7 +13,7 @@ jobs:
           POSTGRES_PASSWORD: 'postgres20930988'
     steps:
       - checkout
-      - run: mkdir tests/v1
+      - run: mkdir test-reports
       - run:
           command: |
             python3 -m venv venv
@@ -28,7 +28,7 @@ jobs:
             . venv/bin/activate
             python3 manage.py pytest
       - store_artifacts:
-          path: tests/v1/
+          path: test-reports
           destination: tr1
       - store_test_results:
-          path: tests/v1/
+          path: test-reports
