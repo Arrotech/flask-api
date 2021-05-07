@@ -1,0 +1,30 @@
+language:
+  - python
+python:
+  - "3.6"
+
+before_install:
+  - gem install bundler
+
+install:
+  - pip install -r requirements.txt
+
+services:
+    - postgresql
+    - rabbitmq
+
+addons:
+    postgresql: '9.6'
+    apt:
+      packages:
+        - rabbitmq-server
+
+before_script:
+  - psql -c 'create database test_flask_api;' -U postgres
+
+script:
+  - pytest --cov=app --cov-report=term-missing
+
+after_success:
+  - coveralls
+  - codecov
