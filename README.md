@@ -8,10 +8,11 @@ You will learn how to use the following `flask MVC/API template` to create a `la
 # Getting Started
 
 1. Clone the following [repo](https://github.com/Arrotech/flask-api.git) to your local machine.
-2. Create a local virtual environment inside the root directory of the cloned [repo](https://github.com/Arrotech/flask-api.git) i.e `python3 -m venv venv`.
-3. Activate the environment as follows: `source .env`.
+2. Create a local virtual environment inside the root directory of the cloned [repo](https://github.com/Arrotech/flask-api.git) i.e `python3 -m venv venv` in linux or `python -m venv venv` in windows.
+3. To activate the environment first navigate to the `.env` file and comment or uncomment the environment activation line according to your operating system then simply activate the environment by typing: `source .env`. Alternatively you can activate the environment by typing the whole path: In windows `source venv/Scripts/activate` or `source venv/bin/activate` in linux.
 4. Install all the required dependencies as follows: `pip install -r requirements.txt`.
-5. If you want to use your own database, navigate to the root directory and find `.env` file and update the `DATABASE_URI` and `TEST_DATABASE_URI`
+5. If you want to use your own database, navigate to the root directory and find `.env` file and update the `DATABASE_URI` and `TEST_DATABASE_URI`.
+
 
 **NB** You should also update your `APP SECRET KEY` from the `.env` file.
 
