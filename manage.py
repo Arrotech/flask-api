@@ -48,12 +48,28 @@ class Pytest(Command):
     capture_all_args = True
 
     def run(self, argv):
-        ret = subprocess.call(
-            ['venv/bin/pytest',
-             '--cov=app',
-             '--cov-report=term-missing',
-             ] + argv)
-        sys.exit(ret)
+        if sys.platform == 'linux' or sys.platform == 'linux2':
+            ret = subprocess.call(
+                ['venv/bin/pytest',
+                 '--cov=app',
+                 '--cov-report=term-missing',
+                 ] + argv)
+            sys.exit(ret)
+        elif sys.platform == 'win32':
+            ret = subprocess.call(
+                ['venv/Scripts/pytest.exe',
+                 '--cov=app',
+                 '--cov-report=term-missing',
+                 ] + argv)
+            sys.exit(ret)
+        else:
+            ret = subprocess.call(
+                ['venv/bin/pytest',
+                 '--cov=app',
+                 '--cov-report=term-missing',
+                 ] + argv)
+            sys.exit(ret)
+
 
 
 manager.add_command('pytest', Pytest())
