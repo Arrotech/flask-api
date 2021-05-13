@@ -16,6 +16,11 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URI')
 
+    REDISTOGO_URL = os.environ.get('REDISTOGO_URL')
+
+    # celery config
+    CELERY_CONFIG = {}
+
 
 class DevelopmentConfig(Config):
     """Development app settings."""
