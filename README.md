@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/Arrotech/flask-api.svg?style=svg)](https://circleci.com/gh/Arrotech/flask-api)
+[![CircleCI](https://circleci.com/gh/Arrotech/flask-api.svg?style=svg)](https://circleci.com/gh/Arrotech/flask-api) [![Build Status](https://dev.azure.com/arrotech254/Azure%20Pipeline/_apis/build/status/Arrotech.flask-api?branchName=develop)](https://dev.azure.com/arrotech254/Azure%20Pipeline/_build/latest?definitionId=1&branchName=develop)
 
 
 # Flask MVC/API (Starter Template)
