@@ -11,6 +11,9 @@ jobs:
           SQLALCHEMY_DATABASE_URI: postgresql://postgres:postgres20930988@localhost:5432/test_flask_api
           TEST_DATABASE_URL: postgresql://postgres:postgres20930988@localhost:5432/test_flask_api?sslmode=disable
       - image: circleci/postgres:9.6.5-alpine-ram
+        auth:
+          username: arrotech
+          password: Harun20930988!  # context / project UI env-var 
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: test_flask_api
