@@ -3,6 +3,9 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
+        auth:
+          username: arrotech
+          password: Harun20930988!  # context / project UI env-var 
         environment:
           FLASK_ENV: testing
           SQLALCHEMY_DATABASE_URI: postgresql://postgres:postgres20930988@localhost:5432/test_flask_api
