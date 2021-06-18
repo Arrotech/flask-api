@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/Arrotech/flask-api.svg?style=svg)](https://circleci.com/gh/Arrotech/flask-api)
+[![CircleCI](https://circleci.com/gh/Arrotech/flask-api.svg?style=svg)](https://circleci.com/gh/Arrotech/flask-api) [![Maintainability](https://api.codeclimate.com/v1/badges/16fcf66b72437e32b882/maintainability)](https://codeclimate.com/github/Arrotech/flask-api/maintainability)
 
 
 # Flask MVC/API (Starter Template)
