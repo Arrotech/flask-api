@@ -1,4 +1,9 @@
 import os
+from os import path
+from dotenv import load_dotenv
+
+base_dir = path.abspath(path.dirname(__name__))
+load_dotenv(path.join(base_dir, '.env'))
 
 
 class Config(object):
@@ -10,6 +15,11 @@ class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URI')
+
+    REDISTOGO_URL = os.environ.get('REDISTOGO_URL')
+
+    # celery config
+    CELERY_CONFIG = {}
 
 
 class DevelopmentConfig(Config):
