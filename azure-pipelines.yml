@@ -43,6 +43,9 @@ stages:
       displayName: "Install requirements"
 
     - script: |
+        pip install pytest
+        pip install coveralls
+        pip install coverage
         pytest --cov=app --cov-report=term-missing
       displayName: 'Run tests'
 
