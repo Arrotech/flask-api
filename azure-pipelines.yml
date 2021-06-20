@@ -46,7 +46,7 @@ stages:
         pip install pytest
         pip install coveralls
         pip install coverage
-        pytest --cov=app --cov-report=term-missing
+        python3 manage.py pytest
       displayName: 'Run tests'
 
     - script: |
