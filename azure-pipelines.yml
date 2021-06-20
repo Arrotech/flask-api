@@ -41,3 +41,11 @@ stages:
         pip install -r requirements.txt
       workingDirectory: $(projectRoot)
       displayName: "Install requirements"
+
+    - script: |
+        pytest --cov=app --cov-report=term-missing
+      displayName: 'Run tests'
+
+    - script: |
+        bash <(curl -s https://codecov.io/bash)
+      displayName: 'Upload to codecov.io'
