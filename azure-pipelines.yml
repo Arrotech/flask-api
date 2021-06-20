@@ -43,6 +43,7 @@ stages:
       displayName: "Install requirements"
 
     - script: |
+        pip install -r requirements.txt
         pip install pytest
         pip install coveralls
         pip install coverage
