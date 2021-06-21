@@ -15,9 +15,8 @@ jobs:
         python-version: 3.8
     - name: Install dependencies
       run: |
-        python3 -m venv venv
         python -m pip install --upgrade pip
         pip install -r requirements.txt; 
     - name: Test with unittest
       run: |
-        python3 manage.py pytest
+        pytest --cov=app --cov-report=term-missing
