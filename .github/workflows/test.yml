@@ -25,7 +25,7 @@ jobs:
       with:
         parallel: true
     - name: Coveralls
-      uses: Arrotech/flask-api@develop
+      uses: AndreMiras/coveralls-python-action@develop
       with:
         parallel: true
-        flag-name: Unit Test
+        flag-name: Unit Testing
