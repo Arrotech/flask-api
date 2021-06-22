@@ -24,3 +24,8 @@ jobs:
       uses: codecov/codecov-action@v1
       with:
         parallel: true
+    - name: Coveralls
+      uses: AndreMiras/coveralls-python-action@develop
+      with:
+        parallel: true
+        flag-name: Unit Test
