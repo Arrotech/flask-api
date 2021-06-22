@@ -1,5 +1,4 @@
 from flask import render_template
-from arrotechtools import Serializer
 
 from app.api.v1 import blueprint_v1
 
