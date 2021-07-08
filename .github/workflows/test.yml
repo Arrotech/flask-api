@@ -28,4 +28,4 @@ jobs:
       uses: AndreMiras/coveralls-python-action@develop
       with:
         parallel: true
-        flag-name: Unit Testing
+        flag-name: Unit Testingddddd
