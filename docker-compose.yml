@@ -2,12 +2,22 @@ version: '3.4'
 
 services:
   db:
-    image: ${DOCKER_IMAGE}
+    image: postgres
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: flask_api
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres20930988
     ports:
-      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+      - 5433:5432
     volumes:
-      - ${DOCKER_VOLUMES}
+      - ./postgres-data:/var/lib/postgresql/data
+  app:
+    build:
+      context: ./
+    command: flask run --host 0.0.0.0
+    ports:
+      - 5001:5000
+    env_file:
+      - ./.env
+    depends_on:
+      - db
