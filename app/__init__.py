@@ -1,3 +1,4 @@
+import sys
 from os import path
 from dotenv import load_dotenv
 from flask import Flask
@@ -24,6 +25,11 @@ def create_app(config_name='development'):
     app.register_blueprint(blueprint_v1, url_prefix='/api/v1/')
 
     base_dir = path.abspath(path.dirname(__name__))
-    load_dotenv(path.join(base_dir, '.env'))
+    if sys.platform == 'linux' or sys.platform == 'linux2':
+        load_dotenv(path.join(base_dir, '.unix.env'))
+    elif sys.platform == 'win32':
+        load_dotenv(path.join(base_dir, '.windows.env'))
+    else:
+        load_dotenv(path.join(base_dir, '.macos.env'))
 
     return app
