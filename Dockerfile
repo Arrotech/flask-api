@@ -1,7 +1,9 @@
 # pull image
 FROM tiangolo/uwsgi-nginx-flask:python3.6-alpine3.7
 
-RUN apk --update add bash nano
+RUN echo 'hello'
+
+RUN apk add --no-cache bash nano
 
 # set the working directory
 WORKDIR /flask-api
