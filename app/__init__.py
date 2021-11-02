@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from flask import Flask
 from instance.config import app_config
 from app.extensions import db, bootstrap, cors
+from utils.utils import load_env_file
 
 
 def create_app(config_name='development'):
@@ -24,12 +25,6 @@ def create_app(config_name='development'):
 
     app.register_blueprint(blueprint_v1, url_prefix='/api/v1/')
 
-    base_dir = path.abspath(path.dirname(__name__))
-    if sys.platform == 'linux' or sys.platform == 'linux2':
-        load_dotenv(path.join(base_dir, '.unix.env'))
-    elif sys.platform == 'win32':
-        load_dotenv(path.join(base_dir, '.windows.env'))
-    else:
-        load_dotenv(path.join(base_dir, '.macos.env'))
+    load_env_file()
 
     return app
