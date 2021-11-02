@@ -1,9 +1,16 @@
 import os
+import sys
 from os import path
 from dotenv import load_dotenv
 
 base_dir = path.abspath(path.dirname(__name__))
-load_dotenv(path.join(base_dir, '.env'))
+
+if sys.platform == 'linux' or sys.platform == 'linux2':
+    load_dotenv(path.join(base_dir, '.unix.env'))
+elif sys.platform == 'win32':
+    load_dotenv(path.join(base_dir, '.windows.env'))
+else:
+    load_dotenv(path.join(base_dir, '.macos.env'))
 
 
 class Config(object):
