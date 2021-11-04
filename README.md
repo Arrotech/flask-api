@@ -6,20 +6,21 @@ You will learn how to use the following `flask MVC/API template` to create a `la
 
 # Getting Started
 
+## How to run the application.
+
 1. Clone the following [repo](https://github.com/Arrotech/flask-api.git) to your local machine.
 2. Create a local virtual environment inside the root directory of the cloned [repo](https://github.com/Arrotech/flask-api.git) i.e `python3 -m venv venv` in linux or `python -m venv venv` in windows.
-3. To activate the environment first navigate to the `.env` file and comment or uncomment the environment activation line according to your operating system then simply activate the environment by typing: `source .env`. Alternatively you can activate the environment by typing the whole path: In windows `source venv/Scripts/activate` or `source venv/bin/activate` in linux.
+3. Activate virtual environment in windows `source venv/Scripts/activate` or `source venv/bin/activate` in linux.
 4. Install all the required dependencies as follows: `pip install -r requirements.txt`.
-5. If you want to use your own database, navigate to the root directory and find `.env` file and update the `DATABASE_URI` and `TEST_DATABASE_URI`.
+5. Update all the necessary environment variables specific to you.
+6. The run the application as follows `flask run` or `python manage.py runserver`
 
+## How to run the application with docker
 
-**NB** You should also update your `APP SECRET KEY` from the `.env` file.
-
-# How to run the application.
-
-To run the application run the following command `flask run`.
-
-**NB** Make sure your virtual environment is activated.
+1. Make sure docker is installed, set up and running in your machine.
+2. Clone the following [repo](https://github.com/Arrotech/flask-api.git) to your local machine.
+3. Update all the necessary environment variables specific to you.
+4. Run the application in detached mode as follows `docker-compose up -d --build`. You can as well run the application normally as `docker-compose up`
 
 # Growing Your Application
 
@@ -115,6 +116,10 @@ A good practice is to add your `.env` file to a `.gitignore` file. This will pre
 
 ## 10. Deployment
 
+# Contributors
+
+    Kennedy Ngure N.
+
 # Author
 
-    Harun Gachanja Gitundu.
+    Harun Gachanja G.
