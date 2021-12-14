@@ -1,4 +1,5 @@
 import os
+import socket
 
 from flask import make_response, jsonify
 
@@ -12,7 +13,8 @@ app = create_app(os.environ.get('FLASK_ENV'))
 def home():
     return make_response(jsonify({
         "message": "OK",
-        "status": "200"
+        "status": "200",
+        "host": socket.gethostname(),
     }), 200)
 
 

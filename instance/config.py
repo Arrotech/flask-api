@@ -15,6 +15,7 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URI')
 
     REDISTOGO_URL = os.environ.get('REDISTOGO_URL')
+    SESSION_COOKIE_SECURE = False
 
     # celery config
     CELERY_CONFIG = {}

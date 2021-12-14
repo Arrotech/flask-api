@@ -1,22 +1,24 @@
-# pull image
 FROM tiangolo/uwsgi-nginx-flask:python3.6-alpine3.7
 
-RUN echo 'hello'
-
-RUN apk add --no-cache bash nano
-
-# set the working directory
 WORKDIR /flask-api
 
-# copy the requirements
-COPY requirements.txt .
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-# install the dependencies
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.9.0/wait /wait
+
+RUN chmod +x /wait
+
+COPY . /flask-api
+
+RUN apk add --no-cache bash nano
 RUN apk add build-base
+RUN pip3 install --upgrade setuptools
+RUN pip3 install --upgrade pip
+RUN apk update \
+    && apk add postgresql-dev gcc python3-dev musl-dev
 RUN pip install -r requirements.txt
+EXPOSE 5000
 
-# copy the project
-COPY . .
-COPY templates /flask-api/templates
+CMD /wait && gunicorn --bind 0.0.0.0:5000 run:app
 
-CMD ["flask", "run", "--host", "0.0.0.0"]

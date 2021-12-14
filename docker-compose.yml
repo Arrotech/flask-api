@@ -1,34 +1,78 @@
-version: '3.4'
+version: '3.8'
+
+x-database-variables:
+  &database-variables
+  POSTGRES_DB: flask_api
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres20930988
+
+x-app-variables:
+  &app-variables
+  <<: *database-variables
+  DB_HOST: db
+  STAGE: test
+  DATABASE_URI: postgresql+psycopg2://postgres:postgres20930988@db:5432/flask_api
 
 services:
-  api:
+  web:
     build: .
     depends_on:
       - db
-    environment:
-      STAGE: test
-      DATABASE_URI: postgresql+psycopg2://postgres:postgres20930988/flask_api
+    environment: *app-variables
     networks:
       - default
-    ports:
-      - 5000:5000
+    expose:
+      - 5000
     volumes:
-      - ./app:/usr/src/app/app
-      - ./migrations:/usr/src/app/migrations
+      - ./flask-api:/usr/src/app/
     env_file:
-      - ./.windows.env
+      - ./.env
     restart: always
 
+  db_migrate:
+    build: .
+    command: python manage.py db upgrade
+    volumes:
+      - ./flask-api:/usr/src/app/flask-api
+    environment: *app-variables
+    depends_on:
+      - db
+
   db:
-    environment:
-      POSTGRES_DB: flask_api
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres20930988
+    environment: *database-variables
     image: postgres:latest
     networks:
       - default
     ports:
-      - 5433:5432
+      - 5432:5432
     restart: always
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:6.2
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: arrotechdesign@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: postgres20930988
+      PGADMIN_LISTEN_PORT: 80
+    ports:
+      - "8080:80"
+    volumes:
+      - ./pgadmin-data:/var/lib/pgadmin
+      - ./servers.json:/pgadmin4/servers.json # preconfigured servers/connections
+      - ./pgpass:/pgpass # passwords for the connections in this files
+    depends_on:
+      - db
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 1337:80
+    depends_on:
+      - web
+
+volumes:
+  postgres-data: null
+  pgadmin-data: null
