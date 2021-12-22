@@ -6,7 +6,7 @@ from flask import make_response, jsonify
 from app import create_app
 
 
-app = create_app(os.environ.get('FLASK_ENV'))
+app = create_app(os.environ.get('FLASK_ENV', default='development'))
 
 
 @app.route('/')
