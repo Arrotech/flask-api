@@ -116,6 +116,43 @@ A good practice is to add your `.env` file to a `.gitignore` file. This will pre
 
 ## 10. Deployment
 
+## 11. Dockerization
+
+When using Dockerfile only
+
+1. Create a docker image
+
+	$ docker build -t flask-api:1.0 .
+
+2. Run the image
+
+	$ docker run -it -p 5000:5000 flask-api:1.0
+
+3. Run the image in dettached mode
+
+	$ docker run -d -it -p 5000:5000 flask-api:1.0
+
+4. Stop the docker container
+
+	$ docker stop <container_id>
+
+When using docker compose
+
+1. Create a docker image
+
+	$ docker build -t flask-api:1.0 .
+
+2. Deploy with docker compose
+
+	$ docker-compose up
+
+NB// Run multiple services --scale
+
+	$ docker-compose up -d --build --scale web=3
+
+	import socker
+	socket.gethostname()
+
 # Contributors
 
     Kennedy Ngure N.
