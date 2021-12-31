@@ -15,6 +15,9 @@ x-app-variables:
   DB_HOST: db
   STAGE: test
   DATABASE_URI: postgresql+psycopg2://postgres:postgres20930988@db:5432/flask_api
+  RABBITMQ_DEFAULT_USER: admin
+  RABBITMQ_DEFAULT_PASS: mypass
+  FLASK_APP: run
 
 services:
   web:
@@ -24,6 +27,7 @@ services:
     depends_on:
       - db
       - redis
+      - rabbit
     environment: *app-variables
     networks:
       - default
@@ -46,6 +50,15 @@ services:
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
 
+  db_migrate:
+    image: flask_api_web
+    command: python manage.py db upgrade
+    volumes:
+      - ./migrations:/app
+    environment: *app-variables
+    depends_on:
+      - db
+
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4:6.2
@@ -54,7 +67,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./pgadmin-data:/var/lib/pgadmin
+      # - ./pgadmin-data:/var/lib/pgadmin
       - ./servers.json:/pgadmin4/servers.json # preconfigured servers/connections
       - ./pgpass:/pgpass # passwords for the connections in this files
     depends_on:
@@ -67,9 +80,21 @@ services:
       - 1337:80
     depends_on:
       - web
+    healthcheck:
+      test: curl --fail -s http://localhost:1337/ || exit 1
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
 
   redis:
     image: redis:6.2-alpine
+
+  rabbit:
+    # hostname: rabbit
+    image: rabbitmq:latest
+    environment: *app-variables
+    ports:
+      - 15672:15672
 
   celery_worker:
     build: .
@@ -79,10 +104,10 @@ services:
       - .:/app
     env_file:
       - ./.env
-    environment:
-      - FLASK_APP=run
+    environment: *app-variables
     depends_on:
       - redis
+      - rabbit
       - db
 
   celery_beat:
@@ -93,10 +118,10 @@ services:
       - .:/app
     env_file:
       - ./.env
-    environment:
-      - FLASK_APP=run
+    environment: *app-variables
     depends_on:
       - redis
+      - rabbit
       - db
 
   flower:
@@ -107,14 +132,20 @@ services:
       - .:/app
     env_file:
       - ./.env
-    environment:
-      - FLASK_APP:run
+    environment: *app-variables
     ports:
       - 5557:5555
     depends_on:
       - redis
+      - rabbit
       - db
+    healthcheck:
+      test: curl --fail -s http://localhost:5557/ || exit 1
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+
 
 volumes:
   postgres-data: null
-  pgadmin-data: null
+  # pgadmin-data: null
