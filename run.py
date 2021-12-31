@@ -12,7 +12,7 @@ app = create_app(os.environ.get('FLASK_ENV', default='development'))
 @app.route('/')
 def home():
     return make_response(jsonify({
-        "message": "OK",
+        "message": "It works",
         "status": "200",
         "host": socket.gethostname(),
     }), 200)
