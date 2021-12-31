@@ -8,5 +8,5 @@ from app.api.v1.services.tasks import company
 @blueprint_v1.route('/home')
 def index():
     """Home page endpoint."""
-    company.delay("Arrotech")
+    # company.delay("Arrotech")
     return render_template('home/index.html')
