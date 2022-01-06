@@ -25,9 +25,12 @@ services:
     image: flask_api_web
     command: /start
     depends_on:
-      - db
-      - redis
-      - rabbit
+      rabbit:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      db:
+        condition: service_healthy
     environment: *app-variables
     networks:
       - default
@@ -62,7 +65,8 @@ services:
       - ./migrations:/app
     environment: *app-variables
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   pgadmin:
     container_name: pgadmin
@@ -73,10 +77,11 @@ services:
       - "8080:80"
     volumes:
       # - ./pgadmin-data:/var/lib/pgadmin
-      - ./servers.json:/pgadmin4/servers.json # preconfigured servers/connections
-      - ./pgpass:/pgpass # passwords for the connections in this files
+      - ./servers.json:/pgadmin4/servers.json
+      - ./pgpass:/pgpass
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   nginx:
     build: ./nginx
@@ -97,9 +102,13 @@ services:
 
   redis:
     image: redis:6.2-alpine
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 1s
+      timeout: 3s
+      retries: 30
 
   rabbit:
-    # hostname: rabbit
     image: rabbitmq:3.9.11-management-alpine
     environment: *app-variables
     ports:
@@ -110,10 +119,6 @@ services:
       interval: 30s
       timeout: 30s
       retries: 3
-    # image: rabbitmq:latest
-    # environment: *app-variables
-    # ports:
-    #   - 15672:15672
 
   celery_worker:
     build: .
@@ -125,9 +130,12 @@ services:
       - ./.env
     environment: *app-variables
     depends_on:
-      - redis
-      - rabbit
-      - db
+      rabbit:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      db:
+        condition: service_healthy
 
   celery_beat:
     build: .
@@ -139,9 +147,12 @@ services:
       - ./.env
     environment: *app-variables
     depends_on:
-      - redis
-      - rabbit
-      - db
+      rabbit:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      db:
+        condition: service_healthy
 
   flower:
     build: .
@@ -155,9 +166,12 @@ services:
     ports:
       - 5557:5555
     depends_on:
-      - redis
-      - rabbit
-      - db
+      rabbit:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      db:
+        condition: service_healthy
 
 volumes:
   postgres-data: null
