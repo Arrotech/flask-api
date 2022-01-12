@@ -3,7 +3,7 @@ from os import path
 from dotenv import load_dotenv
 from flask import Flask
 from instance.config import app_config
-from app.extensions import db, bootstrap, cors
+from app.extensions import db, cors
 from utils.utils import load_env_file
 from app.celery import make_celery
 
@@ -15,7 +15,6 @@ def create_app(config_name='development'):
 
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
-    bootstrap.init_app(app)
     cors.init_app(app)
     make_celery(app)
 

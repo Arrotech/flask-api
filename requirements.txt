@@ -40,8 +40,6 @@ dominate==2.6.0
 email-validator==1.1.2
 Flask==1.1.2
 Flask-Bcrypt==0.7.1
-Flask-Bootstrap==3.3.7.1
-Flask-Bootstrap4==4.0.2
 Flask-Caching==1.9.0
 Flask-Cors==3.0.10
 Flask-DebugToolbar==0.11.0

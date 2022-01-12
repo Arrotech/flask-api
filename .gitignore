@@ -6,3 +6,5 @@ __pycache__/
 .vscode/
 postgres-data/
 .env
+
+docker_data/

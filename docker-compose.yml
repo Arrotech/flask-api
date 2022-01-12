@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.7'
 
 x-database-variables:
   &database-variables
@@ -25,12 +25,9 @@ services:
     image: flask_api_web
     command: /start
     depends_on:
-      rabbit:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      db:
-        condition: service_healthy
+      - rabbit
+      - redis
+      - db
     environment: *app-variables
     networks:
       - default
@@ -44,7 +41,7 @@ services:
 
   db:
     environment: *database-variables
-    image: postgres:latest
+    image: postgres:13-alpine
     networks:
       - default
     ports:
@@ -61,12 +58,11 @@ services:
   db_migrate:
     image: flask_api_web
     command: python manage.py db upgrade
-    volumes:
-      - ./migrations:/app
+    # volumes:
+    #   - ./migrations:/app
     environment: *app-variables
     depends_on:
-      db:
-        condition: service_healthy
+      - db
 
   pgadmin:
     container_name: pgadmin
@@ -80,8 +76,7 @@ services:
       - ./servers.json:/pgadmin4/servers.json
       - ./pgpass:/pgpass
     depends_on:
-      db:
-        condition: service_healthy
+      - db
 
   nginx:
     build: ./nginx
@@ -114,6 +109,8 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+    volumes:
+      - ./docker_data/rabbitmq:/var/lib/rabbitmq/mnesia # mounting on linux
     healthcheck:
       test: [ "CMD", "rabbitmq-diagnostics", '-q', "ping" ]
       interval: 30s
@@ -130,12 +127,9 @@ services:
       - ./.env
     environment: *app-variables
     depends_on:
-      rabbit:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      db:
-        condition: service_healthy
+      - rabbit
+      - redis
+      - db
 
   celery_beat:
     build: .
@@ -147,12 +141,10 @@ services:
       - ./.env
     environment: *app-variables
     depends_on:
-      rabbit:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      db:
-        condition: service_healthy
+      - rabbit
+      - redis
+      - db
+
 
   flower:
     build: .
@@ -166,12 +158,9 @@ services:
     ports:
       - 5557:5555
     depends_on:
-      rabbit:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      db:
-        condition: service_healthy
+      - rabbit
+      - redis
+      - db
 
 volumes:
   postgres-data: null
