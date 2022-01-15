@@ -30,7 +30,8 @@ services:
       - db
     environment: *app-variables
     networks:
-      - default
+      - frontend
+      - backend
     expose:
       - 5000
     volumes:
@@ -43,7 +44,7 @@ services:
     environment: *database-variables
     image: postgres:13-alpine
     networks:
-      - default
+      - backend
     ports:
       - 5432:5432
     restart: always
@@ -59,10 +60,13 @@ services:
     image: flask_api_web
     command: python manage.py db upgrade
     # volumes:
+
     #   - ./migrations:/app
     environment: *app-variables
     depends_on:
       - db
+    networks:
+      - backend
 
   pgadmin:
     container_name: pgadmin
@@ -77,6 +81,8 @@ services:
       - ./pgpass:/pgpass
     depends_on:
       - db
+    networks:
+      - backend
 
   nginx:
     build: ./nginx
@@ -85,6 +91,8 @@ services:
       - 1337:80
     depends_on:
       - web
+    networks:
+      - frontend
     healthcheck:
       test:
         [
@@ -97,6 +105,8 @@ services:
 
   redis:
     image: redis:6.2-alpine
+    networks:
+      - backend
     healthcheck:
       test: [ "CMD", "redis-cli", "ping" ]
       interval: 1s
@@ -109,6 +119,8 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+    networks:
+      - backend
     volumes:
       - ./docker_data/rabbitmq:/var/lib/rabbitmq/mnesia # mounting on linux
     healthcheck:
@@ -130,6 +142,8 @@ services:
       - rabbit
       - redis
       - db
+    networks:
+      - backend
 
   celery_beat:
     build: .
@@ -144,7 +158,8 @@ services:
       - rabbit
       - redis
       - db
-
+    networks:
+      - backend
 
   flower:
     build: .
@@ -161,6 +176,16 @@ services:
       - rabbit
       - redis
       - db
+    networks:
+      - backend
+
+networks:
+  frontend:
+    name: custom_frontend
+    driver: bridge
+  backend:
+    name: custom_backend
+    driver: bridge
 
 volumes:
   postgres-data: null
