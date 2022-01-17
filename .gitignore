@@ -8,3 +8,4 @@ postgres-data/
 .env
 
 docker_data/
+flask.pem
