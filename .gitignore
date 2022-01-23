@@ -9,3 +9,4 @@ postgres-data/
 
 docker_data/
 flask.pem
+flask.ppk

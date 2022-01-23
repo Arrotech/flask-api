@@ -10,7 +10,7 @@ class Config(object):
     DEBUG = False
     TESTING = False
 
-    SECRET_KEY = os.environ.get('SECRET_KEY')
+    SECRET_KEY = os.environ.get('SECRET_KEY', default='dsbsjsbdkjsdskdb')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URI')
 

@@ -34,8 +34,6 @@ COPY ./celery/flower/start /start-flower
 RUN sed -i 's/\r$//g' /start-flower
 RUN chmod +x /start-flower
 
-EXPOSE 5000
-
 WORKDIR /app
 
 ENTRYPOINT ["/entrypoint"]
