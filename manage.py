@@ -43,6 +43,7 @@ def create_tables():
 
 
 class Pytest(Command):
+    
     """Run tests with pytest."""
     name = "pytest"
     capture_all_args = True

@@ -7,6 +7,7 @@ from instance.config import app_config
 
 
 class TestDevelopmentConfig(TestCase):
+
     """Test development configurations."""
 
     def create_app(self):
@@ -21,6 +22,7 @@ class TestDevelopmentConfig(TestCase):
 
 
 class TestProductionConfig(TestCase):
+
     """Test production configurations."""
 
     def create_app(self):
@@ -34,6 +36,7 @@ class TestProductionConfig(TestCase):
         self.assertTrue(app.config['SQLALCHEMY_DATABASE_URI'] == os.environ.get('DATABASE_URI'))
 
 class TestTestingConfig(TestCase):
+
     """Test testing configurations."""
 
     def create_app(self):
@@ -48,6 +51,7 @@ class TestTestingConfig(TestCase):
         self.assertTrue(app.config['SQLALCHEMY_DATABASE_URI'] == os.environ.get('TEST_DATABASE_URI'))
 
 class TestStagingConfig(TestCase):
+
     """Test staging configurations."""
 
     def create_app(self):
@@ -61,6 +65,7 @@ class TestStagingConfig(TestCase):
         self.assertTrue(app.config['SQLALCHEMY_DATABASE_URI'] == os.environ.get('DATABASE_URI'))
 
 class TestReleaseConfig(TestCase):
+    
     """Test release configurations."""
 
     def create_app(self):

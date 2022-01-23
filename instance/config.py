@@ -5,6 +5,7 @@ load_env_file()
 
 
 class Config(object):
+
     """App default settings."""
 
     DEBUG = False
@@ -23,12 +24,14 @@ class Config(object):
 
 
 class DevelopmentConfig(Config):
+
     """Development app settings."""
 
     DEBUG = True
 
 
 class ProductionConfig(Config):
+
     """Production app settings."""
 
     DEBUG = False
@@ -36,6 +39,7 @@ class ProductionConfig(Config):
 
 
 class TestingConfig(Config):
+
     """Testing app configurations."""
 
     TESTING = True
@@ -45,10 +49,12 @@ class TestingConfig(Config):
 
 
 class ReleaseConfig(Config):
+
     """Release app configuration settings."""
 
 
 class StagingConfig(Config):
+    
     """Staging area configuration settings."""
 
     DEBUG = True
