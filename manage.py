@@ -8,7 +8,7 @@ from flask_migrate import Migrate, MigrateCommand
 from app import create_app
 from app.extensions import db
 
-app = create_app(os.environ.get('FLASK_ENV'))
+app = create_app(os.environ.get('FLASK_ENV', default='development'))
 app.app_context().push()
 
 migrate = Migrate(app, db)
