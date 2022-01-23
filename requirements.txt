@@ -75,6 +75,7 @@ keyring==23.4.0
 kombu==5.0.2
 lazy-object-proxy==1.4.3
 logzero==1.6.3
+make==0.1.6.post2
 Mako==1.1.4
 MarkupSafe==1.1.1
 marshmallow==3.10.0
