@@ -23,16 +23,18 @@ jobs:
       - name: Test with pytest
         run: |
           pytest --cov=app --cov-report=term-missing
+
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
           parallel: true
+
       - if: startsWith(matrix.os, 'ubuntu') == true
         name: Coveralls
         uses: AndreMiras/coveralls-python-action@develop
         with:
           parallel: true
-          flag-name: Unit Testing
+          flag-name: Unit Test
 
       - if: startsWith(matrix.os, 'ubuntu') == true
         name: Build and Push Docker Image
@@ -43,6 +45,15 @@ jobs:
           registry: docker.io
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+
+  coveralls_finish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Coveralls Finished
+        uses: AndreMiras/coveralls-python-action@develop
+        with:
+          parallel-finished: true
     # - name: Deploy to Heroku
     #   uses: akhileshns/heroku-deploy@v3.0.0
     #   with:
