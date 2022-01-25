@@ -43,7 +43,7 @@ def create_tables():
 
 
 class Pytest(Command):
-    
+
     """Run tests with pytest."""
     name = "pytest"
     capture_all_args = True
@@ -70,7 +70,6 @@ class Pytest(Command):
                  '--cov-report=term-missing',
                  ] + argv)
             sys.exit(ret)
-
 
 
 manager.add_command('pytest', Pytest())

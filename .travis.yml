@@ -12,14 +12,14 @@ install:
   - pip install coveralls
 
 services:
-    - postgresql
-    - rabbitmq
+  - postgresql
+  - rabbitmq
 
 addons:
-    postgresql: '9.6'
-    apt:
-      packages:
-        - rabbitmq-server
+  postgresql: "9.6"
+  apt:
+    packages:
+      - rabbitmq-server
 
 before_script:
   - psql -c 'create database test_flask_api;' -U postgres

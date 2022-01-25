@@ -14,11 +14,11 @@ def create_app(config_name='development'):
     cors.init_app(app)
     make_celery(app)
 
-    from app.api.v1.home import models # noqa
+    from app.api.v1.home import models  # noqa
 
     db.init_app(app)
 
-    from app.api.v1 import blueprint_v1 # noqa
+    from app.api.v1 import blueprint_v1  # noqa
 
     app.register_blueprint(blueprint_v1, url_prefix='/api/v1/')
 

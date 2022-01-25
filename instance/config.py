@@ -54,7 +54,7 @@ class ReleaseConfig(Config):
 
 
 class StagingConfig(Config):
-    
+
     """Staging area configuration settings."""
 
     DEBUG = True

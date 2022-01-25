@@ -4,52 +4,51 @@
 # https://aka.ms/yaml
 
 trigger:
-- develop
+  - develop
 
 pool:
   vmImage: ubuntu-latest
 
 variables:
-
   # Agent VM image name
-  vmImageName: 'ubuntu-latest'
+  vmImageName: "ubuntu-latest"
 
   # Project root folder. Point to the folder containing manage.py file.
   projectRoot: $(System.DefaultWorkingDirectory)
-  
+
   # Python version: 3.8
-  pythonVersion: '3.8'
+  pythonVersion: "3.8"
 
 stages:
-- stage: Build
-  displayName: Build stage
-  jobs:
-  - job: BuildJob
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - task: UsePythonVersion@0
-      inputs:
-        versionSpec: '$(pythonVersion)'
-      displayName: 'Use Python $(pythonVersion)'
-    
-    - script: |
-        python -m venv venv
-        source venv/bin/activate
-        python -m pip install --upgrade pip
-        pip install setup
-        pip install -r requirements.txt
-      workingDirectory: $(projectRoot)
-      displayName: "Install requirements"
+  - stage: Build
+    displayName: Build stage
+    jobs:
+      - job: BuildJob
+        pool:
+          vmImage: $(vmImageName)
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: "$(pythonVersion)"
+            displayName: "Use Python $(pythonVersion)"
 
-    - script: |
-        pip install -r requirements.txt
-        pip install pytest
-        pip install coveralls
-        pip install coverage
-        python3 manage.py pytest
-      displayName: 'Run tests'
+          - script: |
+              python -m venv venv
+              source venv/bin/activate
+              python -m pip install --upgrade pip
+              pip install setup
+              pip install -r requirements.txt
+            workingDirectory: $(projectRoot)
+            displayName: "Install requirements"
 
-    - script: |
-        bash <(curl -s https://codecov.io/bash)
-      displayName: 'Upload to codecov.io'
+          - script: |
+              pip install -r requirements.txt
+              pip install pytest
+              pip install coveralls
+              pip install coverage
+              python3 manage.py pytest
+            displayName: "Run tests"
+
+          - script: |
+              bash <(curl -s https://codecov.io/bash)
+            displayName: "Upload to codecov.io"

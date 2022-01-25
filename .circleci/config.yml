@@ -11,7 +11,7 @@ jobs:
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: test_flask_api
-          POSTGRES_PASSWORD: 'postgres20930988'
+          POSTGRES_PASSWORD: "postgres20930988"
     steps:
       - checkout
       - run: mkdir test-reports
@@ -23,7 +23,7 @@ jobs:
       - save_cache:
           key: deps2-{{ checksum "requirements.txt" }}
           paths:
-            - 'venv'
+            - "venv"
       - run:
           command: |
             . venv/bin/activate

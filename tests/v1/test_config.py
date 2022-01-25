@@ -18,7 +18,8 @@ class TestDevelopmentConfig(TestCase):
         self.assertFalse(app.config['SECRET_KEY'] == 'secret')
         self.assertFalse(current_app is None)
         self.assertTrue(app.config['DEBUG'] is True)
-        self.assertTrue(app.config['SQLALCHEMY_DATABASE_URI'] == os.environ.get('DATABASE_URI'))
+        self.assertTrue(app.config['SQLALCHEMY_DATABASE_URI']
+                        == os.environ.get('DATABASE_URI'))
 
 
 class TestProductionConfig(TestCase):
@@ -33,7 +34,9 @@ class TestProductionConfig(TestCase):
         self.assertFalse(app.config['SECRET_KEY'] == 'secret')
         self.assertFalse(current_app is None)
         self.assertTrue(app.config['DEBUG'] is False)
-        self.assertTrue(app.config['SQLALCHEMY_DATABASE_URI'] == os.environ.get('DATABASE_URI'))
+        self.assertTrue(app.config['SQLALCHEMY_DATABASE_URI']
+                        == os.environ.get('DATABASE_URI'))
+
 
 class TestTestingConfig(TestCase):
 
@@ -48,7 +51,9 @@ class TestTestingConfig(TestCase):
         self.assertFalse(current_app is None)
         self.assertTrue(app.config['DEBUG'] is True)
         self.assertTrue(app.config['TESTING'] is True)
-        self.assertTrue(app.config['SQLALCHEMY_DATABASE_URI'] == os.environ.get('TEST_DATABASE_URI'))
+        self.assertTrue(app.config['SQLALCHEMY_DATABASE_URI']
+                        == os.environ.get('TEST_DATABASE_URI'))
+
 
 class TestStagingConfig(TestCase):
 
@@ -62,10 +67,12 @@ class TestStagingConfig(TestCase):
         self.assertFalse(app.config['SECRET_KEY'] == 'secret')
         self.assertFalse(current_app is None)
         self.assertTrue(app.config['DEBUG'] is True)
-        self.assertTrue(app.config['SQLALCHEMY_DATABASE_URI'] == os.environ.get('DATABASE_URI'))
+        self.assertTrue(app.config['SQLALCHEMY_DATABASE_URI']
+                        == os.environ.get('DATABASE_URI'))
+
 
 class TestReleaseConfig(TestCase):
-    
+
     """Test release configurations."""
 
     def create_app(self):
@@ -75,7 +82,9 @@ class TestReleaseConfig(TestCase):
     def test_release_configurations(self):
         self.assertFalse(app.config['SECRET_KEY'] == 'secret')
         self.assertFalse(current_app is None)
-        self.assertTrue(app.config['SQLALCHEMY_DATABASE_URI'] == os.environ.get('DATABASE_URI'))
+        self.assertTrue(app.config['SQLALCHEMY_DATABASE_URI']
+                        == os.environ.get('DATABASE_URI'))
+
 
 if __name__ == '__main__':
     unittest.main()
