@@ -1,6 +1,6 @@
 admin-rights==0.0.1
 alembic==1.5.8
-amqp==5.0.6
+amqp==5.0.9
 aniso8601==4.1.0
 apipkg==1.5
 arrotechtools==0.0.2
