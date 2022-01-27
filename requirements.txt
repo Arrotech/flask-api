@@ -104,7 +104,6 @@ pyflakes==2.2.0
 Pygments==2.10.0
 PyJWT==2.1.0
 pylint==2.7.0
-py-amqp==v5.0.9
 pymongo==3.11.1
 pyOpenSSL==20.0.1
 pyparsing==2.4.7
