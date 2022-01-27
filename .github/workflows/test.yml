@@ -32,9 +32,9 @@ jobs:
           parallel: true
 
       - if: startsWith(matrix.os, 'ubuntu') == true
-        run: coveralls
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: coveralls --service=github
 
       - if: startsWith(matrix.os, 'ubuntu') == true
         name: Build and Push Docker Image
