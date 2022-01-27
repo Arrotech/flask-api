@@ -104,6 +104,8 @@ pyflakes==2.2.0
 Pygments==2.10.0
 PyJWT==2.1.0
 pylint==2.7.0
+py-amqp==v5.0.9
+pymongo==3.11.1
 pyOpenSSL==20.0.1
 pyparsing==2.4.7
 pytest==6.2.3
@@ -117,13 +119,14 @@ pytz>=2021.3
 pywin32-ctypes==0.2.0
 PyYAML==5.4.1
 readme-renderer==32.0
-redis==3.5.3
+redis==4.0.2
 requests==2.25.1
 requests-toolbelt==0.9.1
 rfc3986==1.5.0
 rq==1.7.0
 rsa==4.7.2
 s3transfer==0.4.2
+setuptools>=59.1.1
 six==1.15.0
 soupsieve==2.3.1
 SQLAlchemy==1.4.13
