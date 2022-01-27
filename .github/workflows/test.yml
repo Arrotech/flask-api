@@ -25,10 +25,6 @@ jobs:
         run: |
           pytest --cov=app --cov-report xml --cov-report=term-missing
 
-      - name: Test package build
-        run: |
-          python setup.py sdist bdist_wheel
-
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
