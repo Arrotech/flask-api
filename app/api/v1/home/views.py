@@ -8,6 +8,12 @@ from app.api.v1 import blueprint_v1
 # write your views here
 
 
+@blueprint_v1.route('/home', methods=['GET'])
+def index():
+    """Home page."""
+    return render_template('home/index.html')
+
+
 @blueprint_v1.route('/users', methods=['GET'])
 def get_users():
     """Home page endpoint."""
