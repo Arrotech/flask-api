@@ -6,13 +6,11 @@ ENV PYTHONUNBUFFERED 1
 RUN apk add --no-cache bash nano
 RUN apk add build-base
 RUN apk update \
-    # dependencies for building Python packages
     && apk add postgresql-dev gcc python3-dev musl-dev libffi-dev python-dev \
     && rm -rf /var/lib/apk
-    
+
 RUN pip install --upgrade pip setuptools
 
-# Requirements are installed here to ensure they will be cached.
 COPY ./requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 
