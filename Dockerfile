@@ -1,18 +1,26 @@
-FROM tiangolo/uwsgi-nginx-flask:python3.6-alpine3.7
+FROM python:3.10.2-alpine3.15
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-RUN apk add --no-cache bash nano
-RUN apk add build-base
-RUN apk update \
-    && apk add postgresql-dev gcc python3-dev musl-dev libffi-dev python-dev \
-    && rm -rf /var/lib/apk
+WORKDIR /app
 
-RUN pip install --upgrade pip setuptools
+ARG BUILD_DEPENDENCIES=""
+ARG RUNTIME_DEPENDENCIES=""
 
-COPY ./requirements.txt /requirements.txt
-RUN pip install -r /requirements.txt
+RUN apk add --no-cache bash nano build-base postgresql-dev gcc python3-dev musl-dev libffi-dev
+
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+
+
+# FROM python:3.10.2-alpine3.15
+
+# WORKDIR /app
+
+# RUN apk add --no-cache bash postgresql-dev gcc python3-dev musl-dev
+
+# COPY --from=builder /app /app
 
 COPY ./entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint
@@ -34,7 +42,7 @@ COPY ./celery/flower/start /start-flower
 RUN sed -i 's/\r$//g' /start-flower
 RUN chmod +x /start-flower
 
-WORKDIR /app
+# ENV PYTHONPATH="${PYTHONPATH}:/app/dependencies"
 
 ENTRYPOINT ["/entrypoint"]
 

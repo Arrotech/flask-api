@@ -3,3 +3,5 @@ __pycache__/
 .pyc*
 flask.pem
 flask.ppk
+.vscode/
+.pytest_cache/
