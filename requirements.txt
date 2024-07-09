@@ -143,4 +143,4 @@ Werkzeug==1.0.1
 wrapt==1.11.1
 WTForms==3.0.0a1
 wtforms-validators==1.0.0
-zipp==3.6.0
+zipp==3.19.1
